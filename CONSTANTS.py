@@ -47,7 +47,7 @@ def GET_PROJECT_ROOT():
     current_abspath = os.path.abspath('__file__')
     while True:
         # change to logbar after testing
-        if os.path.split(current_abspath)[1] == 'LogBar':
+        if os.path.split(current_abspath)[1] == 'logbar':
             project_root = current_abspath
             break
         else:
