@@ -1,5 +1,5 @@
 # LogBar
-
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6375627.svg)](https://doi.org/10.5281/zenodo.6375627)
 LogBar is an artifact of ESEC/FSE 2022: **Old Algorithm Can Still Excel – An Evaluation of Improved Principle Component Analysis in Log-based Anomaly Detection**.
 
 
@@ -45,7 +45,8 @@ We used `3` open-source log datasets, HDFS, BGL, and Spirit.  The table below il
 | BGL             | Blue Gene/L supercomputer log      | 214.7 days | 4,747,963   | 708.76 MB | [Usenix-CFDR Data](https://www.usenix.org/cfdr-data#hpc4) |
 | Spirit          | Spirit supercomputer log           | 2.5 years  | 272,298,969 | 37.34 GB  | [Usenix-CFDR Data](https://www.usenix.org/cfdr-data#hpc4) |
 
-
+You can find the datasets files by doi: 10.5281/zenodo.6375627 or just click the doi badge from the title.
+Please note that due to size limitation, the zenodo archive do not include the original log files (e.g., HDFS log file), but it should allow you to run the scripts directly. If anything goes wrong, please download the log files and put it into the corresponding folder(e.g, `datasets/HDFS/HDFS.log` for HDFS log data).
 
 ## Environment
 
