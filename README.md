@@ -1,7 +1,7 @@
-# LogBar
+# SemPCA
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6375627.svg)](https://doi.org/10.5281/zenodo.6375627)
 
-LogBar is an artifact of ESEC/FSE 2022: **Old Algorithm Can Still Excel – An Evaluation of Improved Principle Component Analysis in Log-based Anomaly Detection**.
+SemPCA is an artifact of our empirical study: **Try with Simpler – An Evaluation of Improved Principle Component Analysis in Log-based Anomaly Detection**.
 
 
 
