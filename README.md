@@ -97,3 +97,6 @@ authors are anonymous at the current stage.
 
 \* *corresponding author*
 
+
+## 关于使用部分数据集
+我们可以在SimpleCutting这个文件中修改对应的cut_func，通过随机选择某一段train数据实现降采样

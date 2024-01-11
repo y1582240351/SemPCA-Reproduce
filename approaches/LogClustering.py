@@ -25,7 +25,7 @@ if __name__ == '__main__':
     argparser.add_argument('--parser', default='IBM', type=str,
                            help='Select parser, please see parser list for detail. Default Official.')
     argparser.add_argument('--max_dist', type=float, default=0.3, help="Max Distance parameter in LogClustering.")
-    argparser.add_argument('--anomaly_threshold', type=float, default=None,
+    argparser.add_argument('--threshold', type=float, default=0.0,
                            help="Anomaly Threshold parameter in LogClustering.")
     argparser.add_argument('--save_results', type=bool, default=False,
                            help="Whether to save results.")
@@ -34,7 +34,7 @@ if __name__ == '__main__':
     dataset = args.dataset
     parser = args.parser
     max_dist = args.max_dist
-    anomaly_threshold = args.anomaly_threshold
+    anomaly_threshold = args.threshold 
     save_results = args.save_results
 
     # Training, Validating and Testing instances.
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     train_inputs = feature_representor.transform(np.asarray(train_normals, dtype=object))
     test_inputs = feature_representor.transform(np.asarray(test_inputs, dtype=object))
 
-    model = LogClustering(max_dist=max_dist, anomaly_threshold=anomaly_threshold, mode='online')
+    model = LogClustering(max_dist=float(max_dist), anomaly_threshold=float(anomaly_threshold), mode='online')
     model.fit(X=train_inputs)
     predict_start = time.time()
     test_predicted = model.evaluate(test_inputs, test_labels, threshold=anomaly_threshold)

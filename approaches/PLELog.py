@@ -1,6 +1,6 @@
 import sys
 
-from models.lstm import PLELog
+
 
 sys.path.extend([".", ".."])
 from CONSTANTS import *
@@ -13,7 +13,7 @@ import argparse
 from sklearn.decomposition import FastICA
 from preprocessing.preprocess import Preprocessor
 from utils.common import get_precision_recall, data_iter, generate_tinsts_binary_label, batch_variable_inst
-
+from models.lstm import PLELog
 # Hyper parameters.
 lstm_hiddens = 100
 num_layer = 2
@@ -187,12 +187,12 @@ if __name__ == '__main__':
     best_thre = -1
     while thre <= 1:
         plelog.logger.info('=== Last Model ===')
-        plelog.model.load_state_dict(torch.load(last_model_file))
+        plelog.model.load_state_dict(torch.load(last_model_file, map_location='cuda:0'))
         if best_thre == -1:
             bestP, bestR, bestF = plelog.evaluate(test, thre)
             best_thre = thre
         else:
-            plelog.model.load_state_dict(torch.load(last_model_file))
+            plelog.model.load_state_dict(torch.load(last_model_file, map_location='cuda:0'))
             p, r, f = plelog.evaluate(test, thre)
             if f > bestF:
                 bestP = p
@@ -201,7 +201,7 @@ if __name__ == '__main__':
                 best_thre = thre
         if os.path.exists(best_model_file):
             plelog.logger.info('=== Best Model ===')
-            plelog.model.load_state_dict(torch.load(best_model_file))
+            plelog.model.load_state_dict(torch.load(best_model_file, map_location='cuda:0'))
             p, r, f = plelog.evaluate(test, thre)
             if f > bestF:
                 bestP = p

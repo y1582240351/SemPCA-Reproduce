@@ -37,8 +37,10 @@ def cut_by_613(instances):
     random.seed(seed)
     random.shuffle(train)
     train_split = int(0.6 * len(instances))
+    train_len = int(train_split * 0.05)
+    train_begin = random.randint(0, train_split-train_len-1)
     dev = train[train_split:]
-    train = train[:train_split]
+    train = train[train_begin:train_begin+train_len]
     return train, dev, test
 
 

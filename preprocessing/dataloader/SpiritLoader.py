@@ -1,5 +1,6 @@
 import datetime
 import sys
+import re
 
 sys.path.extend([".", ".."])
 from CONSTANTS import *
@@ -219,7 +220,8 @@ class SpiritLoader(BasicDataLoader):
         summarized_lines = []
         # Prepare a clean log file for parsing
         writer = open(self.file_for_parsing, 'w', encoding='utf-8')
-
+        date_pattern = re.compile(r"\d{4}\.\d{2}\.\d{2}")
+        time_pattern = re.compile(r"\d{2}:\d{2}:\d{2}")
         with open(self.in_file, 'r', encoding='iso-8859-1') as reader:
             line_num = 0
             for line in reader.readlines():
@@ -231,11 +233,19 @@ class SpiritLoader(BasicDataLoader):
                 tokens = line.split()
                 prefix = tokens[0]
                 node = tokens[3]
-                datetime_str = tokens[2] + ' ' + tokens[6]
-                line = self._pre_process(line)
-                writer.write(line + '\n')
-                dt = datetime.datetime.strptime(datetime_str, '%Y.%m.%d %H:%M:%S')
-                summarized_lines.append([line_num, prefix, dt])
+                
+                if not re.match(date_pattern, tokens[2]) or not re.match(time_pattern, tokens[6]):
+                    line_num += 1
+                    continue
+                try:
+                    datetime_str = tokens[2] + ' ' + tokens[6]
+                    line = self._pre_process(line)
+                    writer.write(line + '\n')
+                    dt = datetime.datetime.strptime(datetime_str, '%Y.%m.%d %H:%M:%S')
+                    summarized_lines.append([line_num, prefix, dt])
+                except ValueError:
+                    line_num += 1
+                    continue
                 # if dt > datetime.datetime.strptime('2005.03.01 00:00:00', '%Y.%m.%d %H:%M:%S'):
                 #     break
                 line_num += 1

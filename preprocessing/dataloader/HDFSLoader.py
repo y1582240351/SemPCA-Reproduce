@@ -178,6 +178,7 @@ class HDFSLoader(BasicDataLoader):
                     writer.write(':'.join([block, ' '.join([str(x) for x in self.block2seqs[block]])]) + '\n')
         else:
             self.logger.info('Start load from previous extraction. File path %s' % sequence_file)
+            # 在这里修改数据集加载数量
             with open(sequence_file, 'r', encoding='utf-8') as reader:
                 for line in tqdm(reader.readlines()):
                     tokens = line.strip().split(':')
@@ -195,8 +196,10 @@ class HDFSLoader(BasicDataLoader):
             for line in reader.readlines():
                 token = line.strip().split(',')
                 block = token[0]
-                label = self.id2label[int(token[1])]
-                self.block2label[block] = label
+                # label = self.id2label[int(token[1])]
+                if token[1] == "Anomaly":
+                    token[1] = "Anomalous"
+                self.block2label[block] = token[1]
 
 
 if __name__ == '__main__':

@@ -126,7 +126,8 @@ class BasicDataLoader():
         for block, seq in self.block2seqs.items():
             self.block2eventseq[block] = []
             for log_id in seq:
-                self.block2eventseq[block].append(self.log2temp[log_id])
+                if log_id in self.log2temp.keys():
+                    self.block2eventseq[block].append(self.log2temp[log_id])
 
         # Prepare semantic embeddings.
         self._prepare_semantic_embed(templates_embedding_file)

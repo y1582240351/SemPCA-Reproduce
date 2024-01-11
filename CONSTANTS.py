@@ -36,7 +36,6 @@ print('Seeding Finished')
 
 # Device configuration
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-
 SESSION = hashlib.md5(
     time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(time.time() + 8 * 60 * 60)).encode('utf-8')).hexdigest()
 SESSION = 'SESSION_' + SESSION
@@ -47,7 +46,7 @@ def GET_PROJECT_ROOT():
     current_abspath = os.path.abspath('__file__')
     while True:
         # change to logbar after testing
-        if os.path.split(current_abspath)[1] == 'logbar':
+        if os.path.split(current_abspath)[1] == 'SemPCA':
             project_root = current_abspath
             break
         else:

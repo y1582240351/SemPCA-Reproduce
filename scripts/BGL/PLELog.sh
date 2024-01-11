@@ -1,2 +1,2 @@
 cd ../..
-python -u ./approaches/PLELpg.py --dataset HDFS --mode test --threshold 0.7
+python -u ./approaches/PLELog.py --dataset HDFS --mode test --threshold 0.7

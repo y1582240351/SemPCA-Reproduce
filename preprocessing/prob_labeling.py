@@ -39,7 +39,7 @@ class Probabilistic_Labeling():
                 os.makedirs(folder)
 
     def auto_label(self, instances, normal_ids):
-        if os.path.exists(self.res_file) and os.path.exists(self.random_state_file) and os.path.getsize(
+        if False and os.path.exists(self.res_file) and os.path.exists(self.random_state_file) and os.path.getsize(
                 self.res_file) != 0:
             self.logger.info('Found previous labeled file, will load and continue to accelerate the process.')
             with open(self.random_state_file, 'rb') as reader:
