@@ -98,5 +98,51 @@ authors are anonymous at the current stage.
 \* *corresponding author*
 
 
-## 关于使用部分数据集
-我们可以在SimpleCutting这个文件中修改对应的cut_func，通过随机选择某一段train数据实现降采样
+## 论文复现
+
+### 降低数据集规模
+在复现工作中，其中一个工作是通过降低数据集的规模来模拟数据不足的情况下不同算法的表现。
+为了实现这一点，我们需要对代码进行一些修改，在分割数据集的时候只选取部分训练数据。需要修改的位置在 `preprocessing/datacutter/SimpleCutting.py`，修改其中两个将数据集分割的函数即可。这里修改的是 `cut_by_613()`
+```python
+# 只加载1%的数据
+train_len = int(train_split * 0.01)
+train_begin = random.randint(0, train_split-train_len-1)
+train = train[train_begin:train_begin+train_len]
+```
+
+### 复现过程中的一些问题
+在使用 Spirit 数据集复现该实验时，出现了内存 OOM 的问题，而且在复现的时候 CPU 压力十分大。重新检查了一下代码，推测有可能是`preprocessing/dataloader/SpiritLoader.py`中加载数据有问题。Spirit 数据集的大小为 37.34GB，`SpiritLoader.py`中使用python实现了数据集加载方法，而且其中大量使用了字典类型的变量，而这也导致了CPU和内存的压力过大。
+
+
+### 复现结果
+#### HDFS
+PCA
+![](./result/pca-hdfs.png)
+LogCluster
+![](./result/logcluster-hdfs.png)
+DeepLog
+![](./result/deeplog-hdfs.png)
+LogAnomaly
+![](./result/LogAnomaly-hdfs.png)
+PLELog
+![](./result/plelog-hdfs.png)
+LogRobust
+![](./result/logrobust-hdfs.png)
+SemPCA
+![](./result/SemPCA-hdfs.png)
+
+#### BGL
+PCA
+![](./result/pca-bgl.png)
+LogCluster
+![](./result/logcluster-bgl.png)
+DeepLog
+![](./result/deeplog-bgl.png)
+LogAnomaly
+![](./result/loganomaly-bgl.png)
+PLELog
+![](./result/plelog-bgl.png)
+LogRobust
+![](./result/logrobust-bgl.png)
+SemPCA
+![](./result/sempca-bgl.png)

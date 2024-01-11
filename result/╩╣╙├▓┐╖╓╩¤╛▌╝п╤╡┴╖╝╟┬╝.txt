@@ -1,0 +1,34 @@
+=================
+==== HDFS =======
+=================
+radio: 0.01
+pca			0.8532,0.8532,
+logcluster 		0.9458,0.9458,0.9456,
+deeplog 		0.4018,0.4015,
+loganomaly		0.8948,
+plelog		0.8240
+logrobust		0.5749,0.5736,0.5232,0.5251,0.5232,0.5232
+sempca		0.9577,
+
+
+radio: 0.02
+pca			0.8557,
+logcluster 		0.9471,
+deeplog 		0.3855,
+loganomaly		0.8948,
+plelog		0.8965,0.8869,0.8054,0.8869,
+logrobust		0.9571
+sempca		0.9571
+
+
+radio: 0.05
+pca			0.8557,
+logcluster 		0.9477
+deeplog 		
+loganomaly		
+plelog		0.9348,0.9348,0.9713,0.9713,0.9758,0.9758,0.9265,0.9758
+logrobust		
+sempca		
+
+
+
